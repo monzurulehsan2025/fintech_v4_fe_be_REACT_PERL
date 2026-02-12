@@ -46,6 +46,10 @@ function App() {
 
       <main className="main-content">
         <header className="header">
+          <div className="banner-container">
+            <img src="/banner.png" alt="Fintech Banner" className="dashboard-banner" />
+            <div className="banner-overlay"></div>
+          </div>
           <div className="header-top">
             <div>
               <p className="secondary-header">Welcome Back, Platform Engineering Lead</p>
