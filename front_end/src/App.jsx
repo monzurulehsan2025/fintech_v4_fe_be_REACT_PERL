@@ -47,7 +47,13 @@ function App() {
       <main className="main-content">
         <header className="header">
           <div className="banner-container">
-            <img src="http://localhost:3000/api/banner" alt="Fintech Banner" className="dashboard-banner" />
+            <img
+              src="http://localhost:3000/api/banner"
+              alt="Fintech Banner"
+              className="dashboard-banner"
+              loading="lazy"
+              onLoad={(e) => e.target.classList.add('loaded')}
+            />
             <div className="banner-overlay"></div>
           </div>
           <div className="header-top">

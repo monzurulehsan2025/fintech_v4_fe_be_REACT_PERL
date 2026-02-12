@@ -460,3 +460,13 @@ body {
   height: 100%;
   background: linear-gradient(to right, rgba(10, 14, 23, 0.8), transparent);
 }
+
+/* Lazy Loading & Fade-in Styles */
+.dashboard-banner {
+  opacity: 0;
+  transition: opacity 1s ease, transform 0.5s ease;
+}
+
+.dashboard-banner.loaded {
+  opacity: 1;
+}
