@@ -5,33 +5,6 @@
         "deploymentFrequency": "18/day",
         "mttr": "14mins"
     },
-    "teamVelocity": [
-        {
-            "name": "Sprint 24",
-            "velocity": 85,
-            "bugs": 4
-        },
-        {
-            "name": "Sprint 25",
-            "velocity": 92,
-            "bugs": 2
-        },
-        {
-            "name": "Sprint 26",
-            "velocity": 88,
-            "bugs": 5
-        },
-        {
-            "name": "Sprint 27",
-            "velocity": 95,
-            "bugs": 1
-        },
-        {
-            "name": "Sprint 28",
-            "velocity": 102,
-            "bugs": 3
-        }
-    ],
     "globalStatus": [
         {
             "region": "North America",
@@ -52,24 +25,6 @@
             "region": "Latin America",
             "status": "Healthy",
             "latency": 68
-        }
-    ],
-    "talentDevelopment": [
-        {
-            "category": "React 19 Training",
-            "progress": 85
-        },
-        {
-            "category": "System Design",
-            "progress": 62
-        },
-        {
-            "category": "Leadership Coaching",
-            "progress": 40
-        },
-        {
-            "category": "Testing Strategies",
-            "progress": 95
         }
     ],
     "recentMilestones": [

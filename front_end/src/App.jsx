@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import DashboardCard from './components/DashboardCard';
-import { VelocityChart, TalentProgressChart } from './components/Charts';
 import { Activity, Users, Globe, Zap, Clock, ShieldCheck } from 'lucide-react';
 // import mockData from './data/mockData.json';
 
@@ -93,10 +92,7 @@ function App() {
           />
         </section>
 
-        <section className="chart-grid">
-          <VelocityChart data={data.teamVelocity} />
-          <TalentProgressChart data={data.talentDevelopment} />
-        </section>
+
 
         <section className="status-section glass-morphism">
           <h3 className="chart-title" style={{ padding: '0 16px' }}>Global Infrastructure Status</h3>

@@ -309,18 +309,7 @@ body {
   margin-left: 4px;
 }
 
-/* Chart Styles */
-.chart-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 24px;
-  padding: 0 24px;
-  margin-bottom: 24px;
-}
 
-.chart-container {
-  padding: 24px;
-}
 
 .chart-title {
   font-size: 1.1rem;
