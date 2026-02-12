@@ -317,47 +317,6 @@ body {
   margin-bottom: 24px;
 }
 
-/* Status Table Styles */
-.status-section {
-  padding: 24px;
-  margin-top: 24px;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.status-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.status-item:last-child {
-  border-bottom: none;
-}
-
-.status-indicator {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.status-indicator.healthy {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success);
-}
-
-.status-indicator.degraded {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--error);
-}
-
 /* App Specific Styles */
 .header-top {
   display: flex;
@@ -405,31 +364,10 @@ body {
   }
 }
 
-.badge {
-  padding: 4px 12px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.badge.completed {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success);
-}
-
-.badge.in-progress {
-  background: rgba(0, 112, 243, 0.1);
-  color: var(--accent-blue);
-}
-
-.badge.backlog {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-}
-
 .app-container {
   display: flex;
 }
+
 /* Banner Styles */
 .banner-container {
   width: 100%;
@@ -445,7 +383,12 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s ease;
+}
+
+.dashboard-banner.loaded {
+  opacity: 1;
 }
 
 .banner-container:hover .dashboard-banner {
@@ -459,14 +402,4 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(to right, rgba(10, 14, 23, 0.8), transparent);
-}
-
-/* Lazy Loading & Fade-in Styles */
-.dashboard-banner {
-  opacity: 0;
-  transition: opacity 1s ease, transform 0.5s ease;
-}
-
-.dashboard-banner.loaded {
-  opacity: 1;
 }

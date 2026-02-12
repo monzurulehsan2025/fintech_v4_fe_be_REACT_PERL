@@ -104,41 +104,7 @@ function App() {
 
 
 
-        <section className="status-section glass-morphism">
-          <h3 className="chart-title" style={{ padding: '0 16px' }}>Global Infrastructure Status</h3>
-          <div className="status-grid">
-            {data.globalStatus.map((region, idx) => (
-              <div key={idx} className="status-item">
-                <div className="region-info">
-                  <p className="font-semibold">{region.region}</p>
-                  <p className="text-secondary" style={{ fontSize: '0.8rem' }}>Latency: {region.latency}ms</p>
-                </div>
-                <span className={`status-indicator ${region.status.toLowerCase()}`}>
-                  {region.status}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        <section className="milestones-section" style={{ marginTop: '24px' }}>
-          <div className="glass-morphism" style={{ padding: '24px' }}>
-            <h3 className="chart-title">Key Strategic Milestones</h3>
-            <div className="milestones-list">
-              {data.recentMilestones.map(milestone => (
-                <div key={milestone.id} className="milestone-item" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid var(--border-color)' }}>
-                  <div>
-                    <p className="font-medium">{milestone.title}</p>
-                    <p className="text-secondary" style={{ fontSize: '0.8rem' }}>Target: {milestone.date}</p>
-                  </div>
-                  <span className={`badge ${milestone.status.toLowerCase().replace(' ', '-')}`}>
-                    {milestone.status}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   );
