@@ -68,38 +68,26 @@ function App() {
         </header>
 
         <section className="stats-container">
-          <DashboardCard
-            title="System Availability"
-            value={`${data.summary.systemHealth}%`}
-            icon={<ShieldCheck size={20} />}
-            trend={{ type: 'up', value: 0.02 }}
-            subtext="from last week"
-            color="green"
-          />
-          <DashboardCard
-            title="Active Users"
-            value={data.summary.activeUsers}
-            icon={<Users size={20} />}
-            trend={{ type: 'up', value: 12 }}
-            subtext="monthly growth"
-            color="cyan"
-          />
-          <DashboardCard
-            title="Deployment Frequency"
-            value={data.summary.deploymentFrequency}
-            icon={<Zap size={20} />}
-            trend={{ type: 'up', value: 8 }}
-            subtext="sprint average"
-            color="blue"
-          />
-          <DashboardCard
-            title="Mean Time To Recover"
-            value={data.summary.mttr}
-            icon={<Clock size={20} />}
-            trend={{ type: 'down', value: 5 }}
-            subtext="improvement"
-            color="purple"
-          />
+          {Object.entries(data.summary).map(([key, value], index) => {
+            // Simple mapping for display titles
+            const displayTitle = key
+              .replace(/([A-Z])/g, ' $1')
+              .replace(/^./, (str) => str.toUpperCase());
+
+            // Assign colors and icons based on index or key for variety
+            const colors = ['blue', 'cyan', 'purple', 'green'];
+            const color = colors[index % colors.length];
+
+            return (
+              <DashboardCard
+                key={key}
+                title={displayTitle}
+                value={typeof value === 'number' && key === 'systemHealth' ? `${value}%` : value}
+                icon={<Activity size={20} />}
+                color={color}
+              />
+            );
+          })}
         </section>
 
 
