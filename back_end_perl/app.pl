@@ -18,15 +18,39 @@ options '*' => sub {
     $c->render(text => '', status => 204);
 };
 
-# Main data endpoint
+# Main data endpoint with pagination
 get '/api/data' => sub {
     my $c = shift;
+    my $page = $c->param('page') || 1;
+    my $limit = $c->param('limit') || 10;
+    
     my $file_path = path(__FILE__)->sibling('data', 'mockData.json');
     
     if (-e $file_path) {
         my $json_text = $file_path->slurp;
-        my $data = decode_json($json_text);
-        $c->render(json => $data);
+        my $full_data = decode_json($json_text);
+        
+        # Convert summary object to an ordered array for stable pagination
+        my @all_metrics = map { { key => $_, value => $full_data->{summary}->{$_} } } sort keys %{$full_data->{summary}};
+        
+        my $total_items = scalar @all_metrics;
+        my $total_pages = int(($total_items + $limit - 1) / $limit);
+        
+        my $start_idx = ($page - 1) * $limit;
+        my $end_idx = $start_idx + $limit - 1;
+        $end_idx = $total_items - 1 if $end_idx >= $total_items;
+        
+        my @sliced_metrics = @all_metrics[$start_idx .. $end_idx];
+        
+        $c->render(json => {
+            summary => \@sliced_metrics,
+            pagination => {
+                totalItems => $total_items,
+                totalPages => $total_pages,
+                currentPage => int($page),
+                limit => int($limit)
+            }
+        });
     } else {
         $c->render(json => { error => 'Data file not found' }, status => 404);
     }

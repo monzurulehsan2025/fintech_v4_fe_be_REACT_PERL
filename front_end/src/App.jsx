@@ -7,9 +7,12 @@ import { Activity, Users, Globe, Zap, Clock, ShieldCheck } from 'lucide-react';
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/data')
+    setData(null);
+    fetch(`http://localhost:3000/api/data?page=${currentPage}&limit=${limit}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch from Perl backend');
         return res.json();
@@ -19,7 +22,7 @@ function App() {
         console.error(err);
         setError(err.message);
       });
-  }, []);
+  }, [currentPage]);
 
   if (error) {
     return (
@@ -28,14 +31,6 @@ function App() {
           <h2 style={{ color: 'var(--error)' }}>Backend Offline</h2>
           <p className="text-secondary">{error}</p>
         </div>
-      </div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <div className="loading-screen">
-        <div className="loader"></div>
       </div>
     );
   }
@@ -67,32 +62,57 @@ function App() {
           </div>
         </header>
 
-        <section className="stats-container">
-          {Object.entries(data.summary).map(([key, value], index) => {
-            // Simple mapping for display titles
-            const displayTitle = key
-              .replace(/([A-Z])/g, ' $1')
-              .replace(/^./, (str) => str.toUpperCase());
+        {!data ? (
+          <div className="loading-screen" style={{ height: '400px', background: 'transparent' }}>
+            <div className="loader"></div>
+          </div>
+        ) : (
+          <>
+            <section className="stats-container">
+              {data.summary.map((item, index) => {
+                const { key, value } = item;
+                // Simple mapping for display titles
+                const displayTitle = key
+                  .replace(/([A-Z])/g, ' $1')
+                  .replace(/^./, (str) => str.toUpperCase());
 
-            // Assign colors and icons based on index or key for variety
-            const colors = ['blue', 'cyan', 'purple', 'green'];
-            const color = colors[index % colors.length];
+                // Assign colors and icons based on index or key for variety
+                const colors = ['blue', 'cyan', 'purple', 'green'];
+                const color = colors[index % colors.length];
 
-            return (
-              <DashboardCard
-                key={key}
-                title={displayTitle}
-                value={typeof value === 'number' && key === 'systemHealth' ? `${value}%` : value}
-                icon={<Activity size={20} />}
-                color={color}
-              />
-            );
-          })}
-        </section>
+                return (
+                  <DashboardCard
+                    key={key}
+                    title={displayTitle}
+                    value={typeof value === 'number' && key === 'systemHealth' ? `${value}%` : value}
+                    icon={<Activity size={20} />}
+                    color={color}
+                  />
+                );
+              })}
+            </section>
 
-
-
-
+            <div className="pagination-controls glass-morphism">
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <div className="page-info">
+                Page <span className="current-page">{data.pagination.currentPage}</span> of {data.pagination.totalPages}
+              </div>
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(prev => Math.min(data.pagination.totalPages, prev + 1))}
+                disabled={currentPage === data.pagination.totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
