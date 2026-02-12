@@ -47,7 +47,7 @@ function App() {
       <main className="main-content">
         <header className="header">
           <div className="banner-container">
-            <img src="/banner.png" alt="Fintech Banner" className="dashboard-banner" />
+            <img src="http://localhost:3000/api/banner" alt="Fintech Banner" className="dashboard-banner" />
             <div className="banner-overlay"></div>
           </div>
           <div className="header-top">

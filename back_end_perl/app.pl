@@ -32,6 +32,12 @@ get '/api/data' => sub {
     }
 };
 
+# Banner image endpoint
+get '/api/banner' => sub {
+    my $c = shift;
+    $c->reply->static('banner.png');
+};
+
 # Status endpoint
 get '/api/status' => sub {
     my $c = shift;
